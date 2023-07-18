@@ -12,4 +12,30 @@ public class IndexController {
 		return "index"; //데이터 붙임 없이 index.jsp 페이지만 보여줍니다. //mapping 작업은 연결작업이라고 생각
 	}
 	
+	@GetMapping("/menu")
+	public String menu() {
+		return "menu";
+		}
+	
+	@GetMapping("/board2")
+	public String board2() {
+		return "board2";
+		
+	}
+	
+	
+	@GetMapping("/mooni")
+	public String mooni() {
+		return "mooni";
+		
+	}
+	
+	@GetMapping("/notice")
+	public String notice() {
+		return "notice";
+		
+	}
+	
+	
+	
 }

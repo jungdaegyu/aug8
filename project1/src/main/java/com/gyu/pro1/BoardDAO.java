@@ -26,6 +26,11 @@ public class BoardDAO {
 		
 		return sqlSession.selectOne("board.detail", bno); //앞에는 네임스페이스. 아이디, 값
 	}
+
+	public void write(BoardDTO dto) {
+		sqlSession.insert("board.write", dto); //네임스페이스.id, 값
+		//sql문 실행하고, dto 값을 집어넣어... 라는 의미
+	}
 	
 	
 }

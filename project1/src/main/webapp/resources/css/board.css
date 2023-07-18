@@ -9,7 +9,7 @@ table{
 }
 th{
 	height:50px;
-	background-color: gray;
+	background-color: #5778ff;
 }
 td{
 	text-align: center;
@@ -25,7 +25,7 @@ td{
 }
 
 .td3{
-	background-color: gray;
+	background-color: #94a9ff;
 }
 
 .title{
@@ -33,7 +33,7 @@ td{
 }
 
 tr:hover {
-	background-color: gray;
+	background-color: #5778ff;
 }
 
 

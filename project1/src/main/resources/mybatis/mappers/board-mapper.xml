@@ -2,18 +2,21 @@
 <!DOCTYPE mapper
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="board">
+<mapper namespace="board"> <!--Map에 들어갔기에 맵이라고 적어줌  -->
 	<select id="boardList"  resultType="Map"> 
-	<!--Map에 들어갔기에 맵이라고 적어줌  -->
 		SELECT * FROM board ORDER BY bno DESC LIMIT 10 
 	</select>
 
 	<!--#{변수명}을 적어주면 변수가 들어가요  -->
 	<select id="detail" parameterType="String" resultType="boardDTO"> <!-- com.gyu.pro1.BoardDTO .. 이렇게 써야했음 config에서 바꿔줌-->
 		SELECT * FROM board WHERE bno=#{bno} 
-	
-	
+
 	</select>	
+	
+	<insert id="write" parameterType="boardDTO">
+		INSERT INTO board(btitle, bcontent, bwrite)
+		VALUES (#{btitle}, #{bcontent}, #{bwrite})
+	</insert>
 	
 
 </mapper>

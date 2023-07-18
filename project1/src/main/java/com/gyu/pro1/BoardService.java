@@ -15,7 +15,7 @@ public class BoardService {
 
 	
 	@Inject // 다 오토와이어드 해도 상관 없음
-	@Named("boardDAO") //보드 다오랑 연결한거야
+	@Named("boardDAO") //보드 디에이오랑 연결한거야
 	private BoardDAO boardDAO;
 	
 	
@@ -31,6 +31,12 @@ public class BoardService {
 		
 		
 		return boardDAO.detail(bno);
+	}
+
+	//글쓰기입니다.
+	public void write(BoardDTO dto) {
+		boardDAO.write(dto);
+		//select를 제외한 나머지는 영향받은 행의 수 (int)를 받아오기도 합니다.
 	}
 	
 	

@@ -12,9 +12,9 @@
 <body>
 <%@ include file="menu.jsp" %>
 	<h1>보드입니다</h1>
-	<div style="text-align:center;"><!--사진 가운데로 -->
-		<img alt="" src="./img/imagess.png" height="200px">	
-	</div>
+	
+	<img alt="" src="./img/imagess.png" height="300px">	
+	<a href="./index">index로 가기</a> 
 	
 <table>
 	<tr class= "td3">
@@ -35,9 +35,8 @@
 			<td class="td1">${row.blike }</td>	
 		</tr>
 	</c:forEach>
+	
+
 </table>	
-	<div style="text-align:right;">
-		<button onclick="location.href='./write'">글쓰기</button>
-	</div>	
 </body>
 </html>

@@ -1,0 +1,37 @@
+@charset "UTF-8";
+
+
+body{
+	margin: 0;
+	padding: 0;
+}
+
+
+nav{
+	position: fixed;
+	top: 0;
+	width: 100%;
+	height:50px;
+	background-color: #94a9ff;
+}
+
+nav ul{
+	margin: 0;
+	padding: 0;
+	text-decoration: none;
+}
+
+nav li{
+	list-style: none; /*li앞에 원을 없애줍니다*/
+	float: left; /*li 요소들은 밑으로 밑으로 나타나는데 글이 왼쪽으로 따닥따닥 붙게 만드는 것*/
+	width: 100px;
+	height: 50px;
+	line-height: 50px;
+	text-align: center;
+}
+
+nav li:hover {
+	background-color: #5778ff;
+	color: black;
+	font-weight: bold;
+}
