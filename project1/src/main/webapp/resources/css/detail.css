@@ -19,9 +19,8 @@
 .name-bar{
 	width: 100%;
 	border-bottom: 1px solid black;
-	background-color: white;
+	background-color: #94a9ff;
 	height: 80px;
-	padding: 20px;
 	box-sizing: border-box;
 }
 .name, .like, .date, .ip{

@@ -31,6 +31,13 @@ public class BoardDAO {
 		sqlSession.insert("board.write", dto); //네임스페이스.id, 값
 		//sql문 실행하고, dto 값을 집어넣어... 라는 의미
 	}
+
+	public void delete(BoardDTO dto) {
+		sqlSession.delete("board.delete", dto);
+		
+	}
+	
+	
 	
 	
 }
