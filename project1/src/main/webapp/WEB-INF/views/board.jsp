@@ -13,9 +13,9 @@
 </head>
 <body>
 <%@ include file="menu.jsp" %>
-	<h1>보드입니다</h1>
+	<h1>메인입니다.</h1>
 	<div style="text-align:center;"><!--사진 가운데로 -->
-		<img alt="" src="./img/imagess.png" height="200px">	
+		<img alt="" src="./img/image22.jpeg" height="200px">	
 	</div>
 	
 <table>

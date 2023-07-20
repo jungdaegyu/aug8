@@ -1,5 +1,7 @@
 package com.gyu.pro1;
 
+import java.util.Map;
+
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
@@ -9,6 +11,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 public class BoardController {
@@ -18,6 +21,10 @@ public class BoardController {
 	//Autowired(데이터타입이 맞으면 ㅇㅋ) 말고 Resource로 연결해보기.. Resource는 이름으로 연결
 	@Resource(name="boardService")
 	private BoardService boardService;
+	
+	@Autowired //7월 20일 12시
+	private Util util; //우리가 만든 숫자 변환을 사용하기 위해서 객체 연결했어요.
+	
 	
 	//@Autowired
 	//private Util util; //util.java랑 연결해서 ip 검사하려는듯.... 컴포넌트 util과 연결했음.. 원래는 Util new 막 이렇게 했어야했는데
@@ -33,11 +40,12 @@ public class BoardController {
 	//파라미터 잡기.. 각 페이지마다 bno 숫자가 다르니까
 	@GetMapping("/detail")
 	public String detail(HttpServletRequest request, Model model) { //디테일이 들어올때 값까지 같이 들어오게 하는거.. 사용자가 118번 글을 클릭했을때 그 내용이 HttpServletRequest request에 들어있는거..
-		String bno = request.getParameter("bno");
+		// String bno = request.getParameter("bno");
+		int bno = util.strToInt(request.getParameter("bno")); //7월 20일 12시 수정
 		//bno에 요청하는 값이 있습니다. 이 값을 db까지 보내겠습니다.
 		// System.out.println("bno : " + bno);
 		
-		BoardDTO dto = boardService.detail(bno); //보드서비스를 실행하면 dto가 나와 이런 느낌
+		BoardDTO dto = boardService.detail(bno); 
 		model.addAttribute("dto", dto);
 		
 		return "detail";
@@ -47,7 +55,6 @@ public class BoardController {
 	public String write() { 
 		return "write";
 	}
-	
 	
 	
 	@PostMapping("/write") //글쓰기 클릭하면 포스트로 들어옴
@@ -86,6 +93,41 @@ public class BoardController {
 		return "redirect:board"; //삭제를 완료한 후에 다시 보드로 갑니다.
 		
 	}
+	
+	
+	@GetMapping("/edit") //수정하기를 만드는거임.. 일단 수정하려면 내가 썼던 글을 다시 보여줘야 하니까 get으로 보여줌
+	public ModelAndView edit(HttpServletRequest request) { //bno가 반드시 들어와야함
+		ModelAndView mv = new ModelAndView("edit"); //edit.jsp로 갈거임
+		//데이터베이스에 bno를 보내서 dto를 얻어옵니다. //mv에 실어보냅니다.
+		
+		BoardDTO dto = boardService.detail(util.strToInt(request.getParameter("bno")));
+		
+		mv.addObject("dto",dto);
+		return mv;
+	}
+	
+	@PostMapping("/edit")
+	public String edit(BoardDTO dto) { 
+		// System.out.println("map : " + map);
+		
+		//System.out.println(dto.getBtitle());
+		//System.out.println(dto.getBcontent());
+		//System.out.println(dto.getBno());	
+		
+		boardService.edit(dto);
+
+		return "redirect:detail?bno=" + dto.getBno(); //보드가 아니라 글을 수정해서 다시 수정한 글이 들어오게..
+		
+	}
+	
+
+	@GetMapping("/login") //화면만 보여주는 녀석
+	public String login() { 
+		return "login";
+	}
+	
+	
+	
 	
 	
 	

@@ -30,7 +30,7 @@ public class BoardService {
 	}
 
 	
-	public BoardDTO detail(String bno) {
+	public BoardDTO detail(int bno) {
 		BoardDTO dto = boardDAO.detail(bno);
 		//ip 중간에 하트 넣어주기 //172.30.1.19 ----> 172.♥.1.19 //그거 다시 ip에 저장하기
 		if (dto.getBip() != null && dto.getBip().indexOf(".") != -1) {
@@ -77,6 +77,12 @@ public class BoardService {
 
 	public void delete(BoardDTO dto) {
 		boardDAO.delete(dto);
+		
+	}
+
+
+	public void edit(BoardDTO dto) {
+		boardDAO.edit(dto);
 		
 	}
 		

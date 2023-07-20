@@ -10,6 +10,13 @@
 <link rel="stylesheet" href="./css/menu.css">
 <link rel="stylesheet" href="./css/detail.css">
 <script type="text/javascript"> /* 자바스크립트 메소드를 사용하기 위해 적어줌 */
+	function edit(){// 7월 20일
+		if (confirm("수정하시겠어요?")) {
+			location.href="./edit?bno=${dto.bno}";
+		}
+	
+}
+	
 	function del(){
 		let chk = confirm("삭제하시겠어요?") // 삭제하기 눌렀을때 삭제할지말지 콘솔 창이 나옴..참 거짓으로 나옵니다.
 		//alert(chk);
@@ -30,7 +37,7 @@
 <h1>디테일이디</h1>
 	<div class="detail-content">
 		<div class="title">
-		${dto.bno } / ${dto.btitle } <img alt="" src="./img/update1.png">&nbsp;<img alt="" src="./img/delete1.png" onclick="del()">	
+		${dto.bno } / ${dto.btitle } <img alt="" src="./img/update1.png" onclick="edit()">&nbsp;<img alt="" src="./img/delete1.png" onclick="del()">	
 		</div>
 		<div class="name-bar">
 			<div class="name">${dto.bwrite }님</div>

@@ -8,7 +8,7 @@
 	</select>
 
 	<!--#{변수명}을 적어주면 변수가 들어가요  -->
-	<select id="detail" parameterType="String" resultType="boardDTO"> <!-- com.gyu.pro1.BoardDTO .. 이렇게 써야했음 config에서 바꿔줌-->
+	<select id="detail" parameterType="Integer" resultType="boardDTO"> <!-- com.gyu.pro1.BoardDTO .. 이렇게 써야했음 config에서 바꿔줌--> <!-- 7월 20일 파라미터 타입 integer로 바꿔주었음 -->
 		SELECT * FROM board WHERE bno=#{bno} 
 
 	</select>	
@@ -23,4 +23,10 @@
 	
 	</delete>	
 
+	<update id="edit" parameterType="boardDTO">
+		UPDATE board SET btitle=#{btitle}, bcontent=#{bcontent}
+		WHERE bno=#{bno}
+	</update>
+	
+	
 </mapper>

@@ -13,6 +13,33 @@ import org.springframework.web.context.request.ServletRequestAttributes;
 
 @Component //이제 new를 쓰는건 dto밖에 없다고 생각해도 무방
 public class Util { //따로 객체를 만들어준 이유는 계속 재활용하기 위해서
+	//문자열이 들어오면 숫자로 변경하기
+	
+	
+	public int strToInt(String str) { //bno를 int로 바꾸고 A나 이런게 들어왔을때 그걸 제외하고 세기 위해... url에 다른걸 집어 넣어도 안바뀌게
+		//숫자로 바꿀 수 있는 경우 숫자로, 만약 숫자로 못 바꾼다면?
+		//"156" -> 156  "156번" -> 156
+		int result = 0;
+		
+		try {
+			result = Integer.parseInt(str);
+		} catch (Exception e) {
+			 // String re =""; //숫자인것만 모을 스트링
+			StringBuilder sb = new StringBuilder();
+			for (int i = 0; i < str.length(); i++) {
+				if (Character.isDigit(str.charAt(i))) { //숫자를 판단하는 isdigit 활용 숫자면 참 아니면 거짓이 나옴
+					// re += str.charAt(i); //숫자인것만 re에 모음	
+					sb.append(str.charAt(i));
+				} 
+				
+			}
+			result = Integer.parseInt(sb.toString()); //숫자로 만들어서
+			
+		}
+		
+		return result; //되돌려줌
+	}
+	
 	
 	public String exchange(String str) {
 		str = str.replaceAll("<", "&lt;"); 

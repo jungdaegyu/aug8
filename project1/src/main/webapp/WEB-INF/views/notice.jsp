@@ -14,10 +14,7 @@
 </head>
 <body>
 <%@ include file="menu.jsp" %>
-	<div style="text-align:center;"><!--사진 가운데로 -->
-		<img alt="" src="./img/imagess.png" height="1000px">	
-	</div>
-	
+
 
 
 </body>

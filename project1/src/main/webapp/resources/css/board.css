@@ -14,10 +14,12 @@ th{
 td{
 	text-align: center;
 	border-bottom: 1px solid gray;
+	align-content: center;
 }
 
 .td1{
 	width: 10%;
+	height: 100%;
 }
 
 .td2{
@@ -34,7 +36,9 @@ td{
 
 tr:hover {
 	background-color: #5778ff;
+
 }
+
 
 
 
