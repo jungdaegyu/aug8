@@ -30,8 +30,22 @@ nav li{
 	text-align: center;
 }
 
+
 nav li:hover {
 	background-color: #5778ff;
 	color: black;
 	font-weight: bold;
+}
+
+
+.lir, liw{
+	float: right;
+
+}
+
+.liw{
+	float: right;
+	width: 300px;
+	overflow: hidden;
+	
 }

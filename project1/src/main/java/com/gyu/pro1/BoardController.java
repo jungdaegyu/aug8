@@ -18,7 +18,7 @@ public class BoardController {
 	//user -> Controller -> Service -> DAO -> mybatis -> DB
 	
 	
-	//Autowired(데이터타입이 맞으면 ㅇㅋ) 말고 Resource로 연결해보기.. Resource는 이름으로 연결
+	//Autowired(데이터타입이 맞으면 오케) 말고 Resource로 연결해보기.. Resource는 이름으로 연결
 	@Resource(name="boardService")
 	private BoardService boardService;
 	
@@ -121,11 +121,7 @@ public class BoardController {
 	}
 	
 
-	@GetMapping("/login") //화면만 보여주는 녀석
-	public String login() { 
-		return "login";
-	}
-	
+
 	
 	
 	

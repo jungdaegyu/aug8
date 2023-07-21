@@ -23,7 +23,6 @@ public class IndexController {
 		
 	}
 	
-	
 	@GetMapping("/mooni")
 	public String mooni() {
 		return "mooni";

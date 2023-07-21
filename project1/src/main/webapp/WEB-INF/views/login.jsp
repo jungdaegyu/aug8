@@ -8,8 +8,9 @@
 <title>로그인 화면</title>
 <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
 <link rel="icon" href="./img/favicon.ico" type="image/x-icon">
+<link rel="stylesheet" href="./css/login.css">
 <link rel="stylesheet" href="./css/menu.css">
-<link rel="stylesheet" href="./css/board.css">
+
 
 </head>
 <body>
@@ -20,24 +21,27 @@
 	</div>
 	<form action="/login" method="post">
         <label for="username">아이디:</label>
-        <input type="text" id="username" name="username">
+        <input type="text" id="id" name="id">
         <br>
         <label for="password">비밀번호:</label>
-        <input type="password" id="password" name="password">
+        <input type="password" id="pw" name="pw">
         <br>
         <button type="submit">Log In</button>
     </form>
     
+ 
+ 
+ 
     
-  <form>
+  <form action="/login" method="post">
   <div id="wrap">
    <h1 class="member">member login</h1>
    <div class="form">
     <div class="form2">
      <div class="form3">
-      <label for="user">아이디</label><input type="text" id="user">
+      <label for="user">아이디</label><input type="text" id="id" name="id">
       <div class="clear"></div>
-      <label for="user">비밀번호</label><input type="password" id="user">
+      <label for="user">비밀번호</label><input type="password" id="pw" name="pw">
      </div>
      <input type="submit" value="로그인하기">
      <div class="clear"></div>
@@ -52,8 +56,8 @@
    </div>
   </div>
  </form>
-    
-    
+ 
+
 ㅣ
 </body>
 

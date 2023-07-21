@@ -12,22 +12,12 @@
 <body>
 <%@ include file="menu.jsp" %>
 		
+	<h1>index</h1>
 		<div style="text-align:center;"><!--사진 가운데로 -->
-		<img alt="" src="./img/login.png" height="300px">	
+		<img alt="" src="./img/image22.jpeg" height="200px">	
 	</div>
-	<div style="text-align:center;">	
-	<form action="/login" method="post">
-        <label for="username">ID:</label>
-        <input type="text" id="username" name="username">
-        <br>
-        <label for="password">PW:</label>
-        <input type="password" id="password" name="password">
-        <br>
-        <br>
-        <button type="submit">들어오세요</button>
-        
-    </form>	
-	</div>
+        <%=request.getHeader("User-Agent") %>
+ 
 
 </body>
 </html>
