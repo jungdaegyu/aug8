@@ -23,15 +23,15 @@ public class BoardService {
 	private Util util; //util.java랑 연결해줬어영 오후..
 	
 	//보드 리스트 불러오는 메소드
-	public List<Map<String, Object>> boardList(){ //boardList를 부르면 map이 나옴
-		List<Map<String, Object>> list = new ArrayList<Map<String,Object>>();
+	public List<BoardDTO> boardList(){ //boardList를 부르면 DTO 나옴
+		
 		
 		return boardDAO.boardList();
 	}
 
 	
-	public BoardDTO detail(int bno) {
-		BoardDTO dto = boardDAO.detail(bno);
+	public BoardDTO detail(BoardDTO dto2) {
+		BoardDTO dto = boardDAO.detail(dto2);
 		//ip 중간에 하트 넣어주기 //172.30.1.19 ----> 172.♥.1.19 //그거 다시 ip에 저장하기
 		if (dto.getBip() != null && dto.getBip().indexOf(".") != -1) {
 			

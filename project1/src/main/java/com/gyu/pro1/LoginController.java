@@ -32,7 +32,7 @@ public class LoginController {
 		
 		//생각해주세요. id/pw를 보냈을 때 무엇이 왔으면 좋을까요?
 		
-		//로그인을 했을때 이름을 가져온다.. 누구 님 안녕하세요.
+		//로그인을 했을때 이름을 가져온다.. 누구님 안녕하세요.
 		
 		//이름 + count(*)
 		LoginDTO result = loginService.login(dto); 
@@ -49,10 +49,10 @@ public class LoginController {
 			session.setAttribute("mname", result.getM_name()); // menu.jsp로 감 
 			session.setAttribute("mid", request.getParameter("id")); //result에선 못끄냄 왜냐하면 mapper에 sql
 			//세션 : 서버, 쿠키 : 클라이언트
-			
-			
 			return "redirect:index"; //정상적으로 로그인 했다면 인덱스로 가기
+			
 		} else {
+			
 			return "login"; //암호/ 아이디가 일치하지 않은 사람은 다시 로그인 하기
 		}	
 	}

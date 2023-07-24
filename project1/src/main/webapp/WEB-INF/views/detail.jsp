@@ -1,10 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+ <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>상세보기</title>
 <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
 <link rel="icon" href="./img/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="./css/menu.css">
@@ -37,10 +38,14 @@
 <h1>디테일이디</h1>
 	<div class="detail-content">
 		<div class="title">
-		${dto.bno } / ${dto.btitle } <img alt="" src="./img/update1.png" onclick="edit()">&nbsp;<img alt="" src="./img/delete1.png" onclick="del()">	
+		${dto.bno } / ${dto.btitle } 
+		<c:if test="${sessionScope.mid ne null && sessionScope.mid eq dto.m_id}"> <!--7.24 로그인 한 사람만 수정하고 삭제할 수 있게 만들어주는거임-->
+		<img alt="" src="./img/update1.png" onclick="edit()">&nbsp;<img alt="" src="./img/delete1.png" onclick="del()">	
+		</c:if>
+		
 		</div>
 		<div class="name-bar">
-			<div class="name">${dto.bwrite }님</div>
+			<div class="name">${dto.m_name }님</div>
 			<div class="like">${dto.blike }</div>
 			<div class="date">${dto.bdate }</div>
 			<div class="ip">${dto.bip}</div>

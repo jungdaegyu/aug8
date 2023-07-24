@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> <!--core태그를 사용하기 위해 써줌-->
+    <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,12 +14,13 @@
 </head>
 <body>
 <%@ include file="menu.jsp" %>
-	<h1>메인입니다.</h1>
-	<div style="text-align:center;"><!--사진 가운데로 -->
+	<h1>게시판입니다.</h1>
+		<div style="text-align:center;"><!--사진 가운데로 -->
 		<img alt="" src="./img/image22.jpeg" height="200px">	
 	</div>
-	
-<table>
+	<%-- 길이 검사 : ${fn:length(list) } --%>
+	<c:choose>
+		<c:when test="${fn:length(list) gt 0 }"><table>
 	<tr class= "td3">
 		<td>번호</td>
 		<td>제목</td> 
@@ -32,14 +34,25 @@
 		<tr onclick="location.href='./detail?bno=${row.bno}'">
 			<td class="td1">${row.bno }</td>
 			<td class="title">${row.btitle }</td>
-			<td class="td1">${row.bwrite }</td>
+			<td class="td1">${row.m_name }</td>
 			<td class="td2">${row.bdate }</td>
 			<td class="td1">${row.blike }</td>	
 		</tr>
 	</c:forEach>
-</table>	
-	<div style="text-align:right;">
-		<button onclick="location.href='./write'">글쓰기</button>
-	</div>	
+</table>
+	</c:when>
+		<c:otherwise><h1>출력할 데이터가 없습니다.</h1></c:otherwise>
+	
+	</c:choose>
+	
+	<!--로그인 했다면 글쓰기 버튼이 보이게 만드는거-->
+	로그인한 이름 : ${sessionScope.mname } / ${sessionScope.mid }
+	<c:if test="${sessionScope.mname ne null}">
+			<button onclick="location.href='./write'">글쓰기</button>
+	</c:if>
+
+	
+
+	
 </body>
 </html>

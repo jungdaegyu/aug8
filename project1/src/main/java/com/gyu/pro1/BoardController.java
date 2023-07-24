@@ -4,6 +4,7 @@ import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -45,34 +46,60 @@ public class BoardController {
 		//bno에 요청하는 값이 있습니다. 이 값을 db까지 보내겠습니다.
 		// System.out.println("bno : " + bno);
 		
-		BoardDTO dto = boardService.detail(bno); 
-		model.addAttribute("dto", dto);
+		
+		//DTO로 변경합니다.
+		BoardDTO dto = new BoardDTO();
+		dto.setBno(bno);
+		
+		BoardDTO result = boardService.detail(dto); 
+		model.addAttribute("dto", result);
 		
 		return "detail";
 	}
 	
 	@GetMapping("/write") //화면만 보여주는 녀석
-	public String write() { 
-		return "write";
+	public String write(HttpServletRequest request) { 
+		HttpSession session = request.getSession(); //7.24 로그인 안한 사람은 글을 못쓰게 막는거 주소창에 write라고 쳐도 안들어가지게
+		if (session.getAttribute("mname") != null) {
+		
+			return "write";
+		} else {
+			return "redirect:/login"; //슬러시 넣어주세요
+		}
+
+		
 	}
 	
 	
 	@PostMapping("/write") //글쓰기 클릭하면 포스트로 들어옴
-	public String write(HttpServletRequest request) { //write 메소드가 똑같기 때문에 HttpServletRequest 씀
+	public String write2(HttpServletRequest request) { //write 메소드가 똑같기 때문에 HttpServletRequest 씀
 		//사용자가 입력한 데이터 변수에 담기
 		//System.out.println(request.getParameter("title")); //wirte.jsp에서 지정했었음
 		//System.out.println(request.getParameter("content"));
 		//System.out.println("===============================");
 			
-		BoardDTO dto = new BoardDTO();
-		dto.setBtitle(request.getParameter("title")); //write.jsp에서 지정을 해주었음
-		dto.setBcontent(request.getParameter("content"));
-		dto.setBwrite("평택남");//이건 임시로 적음.. 로그인 추가되면 변경
+		HttpSession session = request.getSession();
+		if (session.getAttribute("mid") != null) {
+			//로그인 했습니다. = 아래 로직을 여기로 가져오세요.
+			BoardDTO dto = new BoardDTO();
+			dto.setBtitle(request.getParameter("title")); //write.jsp에서 지정을 해주었음
+			dto.setBcontent(request.getParameter("content"));
+			//세션에서 불러오겠습니다.
+			dto.setM_id((String)session.getAttribute("mid"));//세션에서 가져옴
+			dto.setM_name((String)session.getAttribute("mname"));//세션에서 가져옴
+						
+			//Service -> DAO -> maybatis -> DB로 보내서 저장하기
+			boardService.write(dto);
+			
+			return "redirect:board"; //글을 쓰면 다시 보드를 실행시켜라는 뜻.. 다시 컨트롤러 지나가기 get방식으로 감
+			
+		} else {
+			//로그인 안했어요. = 로그인 하세요.
+			return "redirect:/login";
+		}
 		
-		//Service -> DAO -> maybatis -> DB로 보내서 저장하기
-		boardService.write(dto);
 		
-		return "redirect:board"; //글을 쓰면 다시 보드를 실행시켜라는 뜻.. 다시 컨트롤러 지나가기 get방식으로 감
+
 	}
 	
 	
@@ -97,12 +124,22 @@ public class BoardController {
 	
 	@GetMapping("/edit") //수정하기를 만드는거임.. 일단 수정하려면 내가 썼던 글을 다시 보여줘야 하니까 get으로 보여줌
 	public ModelAndView edit(HttpServletRequest request) { //bno가 반드시 들어와야함
+		
+		HttpSession session = request.getSession();
+		
 		ModelAndView mv = new ModelAndView("edit"); //edit.jsp로 갈거임
-		//데이터베이스에 bno를 보내서 dto를 얻어옵니다. //mv에 실어보냅니다.
 		
-		BoardDTO dto = boardService.detail(util.strToInt(request.getParameter("bno")));
+		//dto를 하나 만들어서 거기에 담겠습니다. = bno, mid
+		BoardDTO dto = new BoardDTO();
+		dto.setBno(util.strToInt(request.getParameter("bno")));
+		//내 글만 수정할 수 있도록 세션에 있는 mid도 보냅니다.
+		dto.setM_id((String)session.getAttribute("mid")); //7.24
 		
-		mv.addObject("dto",dto);
+		//데이터베이스에 bno를 보내서 dto를 얻어옵니다. 		
+		BoardDTO result = boardService.detail(dto);
+		
+		//mv에 실어보냅니다
+		mv.addObject("dto", result);
 		return mv;
 	}
 	
