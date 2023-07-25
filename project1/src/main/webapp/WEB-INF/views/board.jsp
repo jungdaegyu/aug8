@@ -26,7 +26,7 @@
 		<td>제목</td> 
 		<td>글쓴이</td>
 		<td>날짜</td>
-		<td>좋아요</td>
+		<td>관심</td>
 	</tr>
 	
 	<c:forEach items="${list}" var="row">

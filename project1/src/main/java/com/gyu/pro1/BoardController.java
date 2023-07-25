@@ -97,20 +97,26 @@ public class BoardController {
 			//로그인 안했어요. = 로그인 하세요.
 			return "redirect:/login";
 		}
-		
-		
 
 	}
 	
 	
-	//삭제를 누르면 어떻게 해야할지 하는 것
 	@GetMapping("/delete") //****************board-mapper에서 설정해줘서 컨트롤러에서 서비스로 서비스에서 디에이오로 그 다음 매퍼에서 다시 역순으로 돌아감 **************
-	public String delete(@RequestParam(value = "bno") int bno) { // @RequestParam("bno") 자동으로 int로 바꿔줘서 int bno에 들어감 //HttpServletRequest의 getParameter(); 사실 있어도 없어도 괜찮을듯 true, false 오류 방지하려고 하는거..
-		// System.out.println("bno : " + bno);
+	public String delete(@RequestParam(value = "bno") int bno, HttpSession session) { // @RequestParam("bno") 자동으로 int로 바꿔줘서 int bno에 들어감 //HttpServletRequest의 getParameter(); 사실 있어도 없어도 괜찮을듯 true, false 오류 방지하려고 하는거..
+		//로그인 여부 확인해주세요.
+		// System.out.println("mid : "+ session.getAttribute("mid"));
+		
+		if (session.getAttribute("mid") != null) { //여기 만들어주고 있음@@@@@@@@@@@@@@@@@
+			BoardDTO dto = new BoardDTO();
+			
+			
+		}
 		
 		
 		BoardDTO dto = new BoardDTO();
 		dto.setBno(bno);
+		dto.setM_id((String)session.getAttribute("mid"));
+		
 		// dto.setBwrite(null) 사용자 정보
 		//추후 로그인을 하면 사용자의 정보도 담아서 보냅니다. 글을 쓴 사람만 자기 글을 삭제할 수 있도록 하기 위함
 		
@@ -124,22 +130,33 @@ public class BoardController {
 	
 	@GetMapping("/edit") //수정하기를 만드는거임.. 일단 수정하려면 내가 썼던 글을 다시 보여줘야 하니까 get으로 보여줌
 	public ModelAndView edit(HttpServletRequest request) { //bno가 반드시 들어와야함
-		
+		//로그인 하지 않으면 로그인 화면으로 던져주세요.
 		HttpSession session = request.getSession();
+		ModelAndView mv = new ModelAndView();
 		
-		ModelAndView mv = new ModelAndView("edit"); //edit.jsp로 갈거임
-		
-		//dto를 하나 만들어서 거기에 담겠습니다. = bno, mid
-		BoardDTO dto = new BoardDTO();
-		dto.setBno(util.strToInt(request.getParameter("bno")));
-		//내 글만 수정할 수 있도록 세션에 있는 mid도 보냅니다.
-		dto.setM_id((String)session.getAttribute("mid")); //7.24
-		
-		//데이터베이스에 bno를 보내서 dto를 얻어옵니다. 		
-		BoardDTO result = boardService.detail(dto);
-		
-		//mv에 실어보냅니다
-		mv.addObject("dto", result);
+		if (session.getAttribute("mid") != null) {	
+			//dto를 하나 만들어서 거기에 담겠습니다. = bno, mid
+			BoardDTO dto = new BoardDTO();
+			dto.setBno(util.strToInt(request.getParameter("bno")));
+			//내 글만 수정할 수 있도록 세션에 있는 mid도 보냅니다.
+			dto.setM_id((String)session.getAttribute("mid"));
+			
+			//데이터베이스에 bno를 보내서 dto를 얻어옵니다. 	
+			BoardDTO result = boardService.detail(dto);
+			
+			if (result != null) {//내 글을 수정했습니다.
+				mv.addObject("dto", result);//mv에 실어보냅니다
+				mv.setViewName("edit");//이동할 jsp명을 적어줍니다.			
+			} else {//다른 사람 글이라면 null입니다. 경고창으로 이동합니다.
+				mv.setViewName("warning");
+			}
+	
+					
+		} else {
+			//로그인 안했다. = login컨트롤러
+			mv.setViewName("redirect:/login");
+			
+		}
 		return mv;
 	}
 	

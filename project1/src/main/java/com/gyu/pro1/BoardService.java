@@ -31,17 +31,24 @@ public class BoardService {
 
 	
 	public BoardDTO detail(BoardDTO dto2) {
+		//좋아요 수 +1하기 기능을 넣어주겠습니다.
+		boardDAO.likeUp(dto2); //안에 bno값이 들어있음
+		
+		
+		
 		BoardDTO dto = boardDAO.detail(dto2);
-		//ip 중간에 하트 넣어주기 //172.30.1.19 ----> 172.♥.1.19 //그거 다시 ip에 저장하기
-		if (dto.getBip() != null && dto.getBip().indexOf(".") != -1) {
-			
-		String ip = dto.getBip(); //ip 뽑아서 string ip에 넣어주기
-			
-		String[] ipA = ip.split("\\."); // .을 기준으로 배열을 나누기
+		System.out.println(dto);
+		// System.out.println(dto.getBno());
+		// System.out.println(dto.getBip());
 		
-		ipA[1] = "♥"; // 배열1을 하트로 바꾸기
-		
-		dto.setBip(String.join(".", ipA)); //배열을 다시 스트링 타입으로 바꿔주기
+		if (dto != null) { //내 글이 아닐때는 null 들어옵니다. 즉, null이 아닐때라고 검사해주세요.
+			if (dto.getBip() != null && dto.getBip().indexOf(".") != -1) {		
+				String ip = dto.getBip(); //ip 뽑아서 string ip에 넣어주기		
+				String[] ipA = ip.split("\\."); // .을 기준으로 배열을 나누기
+				ipA[1] = "♥"; // 배열1을 하트로 바꾸기
+				dto.setBip(String.join(".", ipA)); //배열을 다시 스트링 타입으로 바꿔주기
+
+		}
 		
 		}
 		return dto;
