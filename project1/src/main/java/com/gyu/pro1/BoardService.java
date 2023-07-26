@@ -23,10 +23,10 @@ public class BoardService {
 	private Util util; //util.java랑 연결해줬어영 오후..
 	
 	//보드 리스트 불러오는 메소드
-	public List<BoardDTO> boardList(){ //boardList를 부르면 DTO 나옴
+	public List<BoardDTO> boardList(PageDTO page){ //boardList를 부르면 DTO 나옴
 		
 		
-		return boardDAO.boardList();
+		return boardDAO.boardList(page);
 	}
 
 	
@@ -91,6 +91,11 @@ public class BoardService {
 	public void edit(BoardDTO dto) {
 		boardDAO.edit(dto);
 		
+	}
+
+
+	public int totalCount() { //7.26
+		return boardDAO.totalCount();
 	}
 		
 }

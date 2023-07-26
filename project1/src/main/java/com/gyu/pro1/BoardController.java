@@ -1,6 +1,6 @@
 package com.gyu.pro1;
 
-import java.util.Map;
+import java.util.List;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 
 @Controller
 public class BoardController {
@@ -27,13 +29,37 @@ public class BoardController {
 	private Util util; //우리가 만든 숫자 변환을 사용하기 위해서 객체 연결했어요.
 	
 	
-	//@Autowired
-	//private Util util; //util.java랑 연결해서 ip 검사하려는듯.... 컴포넌트 util과 연결했음.. 원래는 Util new 막 이렇게 했어야했는데
-	
 	@GetMapping("/board")
-	public String board(Model model) { //서비스에서 값 가져옵시다//서비스에서 값 가져옵시다
-		model.addAttribute("list", boardService.boardList()); //list란 이름으로 보드서비스에서 보드리스트를 불러옴
-		boardService.boardList();
+	public String board(@RequestParam(value="pageNo", required = false, defaultValue = "1") int pageNo, Model model) { //서비스에서 값 가져옵시다
+		//페이지네이션인포 -> 값 넣고 -> DB -> jsp //7.26
+		// paginationInfo에 필수 정보를 넣어준다.
+		PaginationInfo paginationInfo = new PaginationInfo();
+		paginationInfo.setCurrentPageNo(pageNo);//현재 페이지 번호
+		paginationInfo.setRecordCountPerPage(10); //한 페이지에 게시되는 게시물 건수
+		paginationInfo.setPageSize(10); //페이징 리스트의 사이즈
+		//전체 글 수 가져오는 명령문장
+		int totalCount = boardService.totalCount();
+		paginationInfo.setTotalRecordCount(totalCount); //전체 게시물 건수
+		
+		int firstRecordIndex = paginationInfo.getFirstRecordIndex(); //시작 위치
+		int recordCountPerPage = paginationInfo.getRecordCountPerPage();//페이지당 몇 개?
+		
+		//System.out.println(firstRecordIndex);
+		//System.out.println(recordCountPerPage);
+		//System.out.println(pageNo);
+		//System.out.println(totalCount);
+		
+		PageDTO page = new PageDTO();
+		page.setFirstRecordIndex(firstRecordIndex);
+		page.setRecordCountPerPage(recordCountPerPage);
+		
+		//보드 서비스 수정합니다. 7.26
+		List<BoardDTO> list = boardService.boardList(page);
+		
+		model.addAttribute("list", list); //list란 이름으로 보드서비스에서 보드리스트를 불러옴
+		//페이징 관련 정보가 있는 PaginationInfo 객체를 모델에 반드시 넣어준다. //7.26
+		model.addAttribute("paginationInfo", paginationInfo);
+		//boardService.boardList();
 		return "board";
 	}
 	

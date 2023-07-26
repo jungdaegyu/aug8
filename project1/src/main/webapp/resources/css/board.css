@@ -7,6 +7,7 @@ table{
 	height: 500px;
 	border-collapse: collapse;
 }
+
 th{
 	height:50px;
 	background-color: #5778ff;
@@ -37,6 +38,24 @@ td{
 tr:hover {
 	background-color: #5778ff;
 
+}
+
+
+.page-div{
+	margin : 0 auto;
+	display: flex;
+	justify-content: center;	
+}
+
+.page-div a{
+	text-decoration: none;
+
+	}
+.page-div img{
+	width: 20px;
+	height: 20px;
+	vertical-align: bottom;
+	
 }
 
 

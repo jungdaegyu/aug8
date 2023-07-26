@@ -2,6 +2,7 @@
     pageEncoding="UTF-8"%>
     <%@taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %> <!--core태그를 사용하기 위해 써줌-->
     <%@taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+    <%@ taglib prefix="ui" uri="http://egovframework.gov/ctl/ui"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,16 +12,23 @@
 <link rel="icon" href="./img/favicon.ico" type="image/x-icon">
 <link rel="stylesheet" href="./css/menu.css">
 <link rel="stylesheet" href="./css/board.css">
+<script type="text/javascript">
+	function linkPage(pageNo){
+		location.href = "./board?pageNo="+pageNo;
+	}	
+</script>
 </head>
 <body>
 <%@ include file="menu.jsp" %>
 	<h1>게시판입니다.</h1>
+	${paginationInfo} 
 		<div style="text-align:center;"><!--사진 가운데로 -->
 		<img alt="" src="./img/image22.jpeg" height="200px">	
-	</div>
+		</div>
 	<%-- 길이 검사 : ${fn:length(list) } --%>
 	<c:choose>
-		<c:when test="${fn:length(list) gt 0 }"><table>
+		<c:when test="${fn:length(list) gt 0 }">
+		<table>
 	<tr class= "td3">
 		<td>번호</td>
 		<td>제목</td> 
@@ -40,9 +48,12 @@
 		</tr>
 	</c:forEach>
 </table>
+
+<div class="page-div">
+	<ui:pagination paginationInfo = "${paginationInfo}"	type="image" jsFunction="linkPage"/>
+</div>
 	</c:when>
 		<c:otherwise><h1>출력할 데이터가 없습니다.</h1></c:otherwise>
-	
 	</c:choose>
 	
 	<!--로그인 했다면 글쓰기 버튼이 보이게 만드는거-->

@@ -19,17 +19,31 @@
 <link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
 <script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
 
-
 </head>
+<script type="text/javascript">
+function check2(){
+	// alert("!");
+	let title = document.getElementById("title");
+	alert(title.value);
+	alert(title.value.length);
+	
+	if (title.value.length < 1) {
+		alert("제목을 입력하세요");
+		title.focus(); /*아이디 쪽으로 다시 옮겨짐 */
+		return false;
+	}
+
+
+</script>
 
 <body>
 <%@ include file="menu.jsp" %>
-	<h1>글을 쓴다</h1>
+	<h1>예쁜말</h1>
 	<div class="write-div">
-	<form action="./write" method="post"><!--글을 쓸때 post를 쓴다 -->		
-		<input type="text" name="title">
+	<form action="./write" method="post" onsubmit="return check2()"><!--글을 쓸때 post를 쓴다 -->		
+		<input type="text" id="title" name="title" >
 		<textarea id="summernote" name="content"></textarea>
-		<button class="btn100" type="submit">글쓰기</button>
+		<button class="btn100" type="submit" onclick="return check2()">글쓰기</button>
 		</form>
 		<!-- type="submit" => 제출버튼, 폼데이터로 데이터 전송 -->	
 	</div>
@@ -44,8 +58,6 @@
 	  height: 400
   });
 });
-
-
 </script>		
 	
 	
