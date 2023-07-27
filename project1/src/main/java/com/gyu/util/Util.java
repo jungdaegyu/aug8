@@ -1,4 +1,4 @@
-package com.gyu.pro1;
+package com.gyu.util;
 
 import javax.servlet.http.HttpServletRequest;
 

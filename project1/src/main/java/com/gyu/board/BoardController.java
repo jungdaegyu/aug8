@@ -1,6 +1,7 @@
-package com.gyu.pro1;
+package com.gyu.board;
 
 import java.util.List;
+import java.util.UUID;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +14,9 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
+
+import com.gyu.page.PageDTO;
+import com.gyu.util.Util;
 
 import egovframework.rte.ptl.mvc.tags.ui.pagination.PaginationInfo;
 
@@ -70,7 +74,7 @@ public class BoardController {
 		// String bno = request.getParameter("bno");
 		int bno = util.strToInt(request.getParameter("bno")); //7월 20일 12시 수정
 		//bno에 요청하는 값이 있습니다. 이 값을 db까지 보내겠습니다.
-		// System.out.println("bno : " + bno);
+		// Systemout.println("bno : " + bno);
 		
 		
 		//DTO로 변경합니다.
@@ -112,8 +116,11 @@ public class BoardController {
 			dto.setBcontent(request.getParameter("content"));
 			//세션에서 불러오겠습니다.
 			dto.setM_id((String)session.getAttribute("mid"));//세션에서 가져옴
-			dto.setM_name((String)session.getAttribute("mname"));//세션에서 가져옴
-						
+			dto.setM_name((String)session.getAttribute("mname"));//세션에서 가져옴 //강사님은 현재 주석처리
+			dto.setUuid(UUID.randomUUID().toString());
+			
+
+			
 			//Service -> DAO -> maybatis -> DB로 보내서 저장하기
 			boardService.write(dto);
 			

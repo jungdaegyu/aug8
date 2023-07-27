@@ -1,4 +1,4 @@
-package com.gyu.pro1;
+package com.gyu.login;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -74,6 +74,15 @@ public class LoginController {
 		
 		return "redirect:index";
 	}
+	
+	@GetMapping("/join")
+	public String join() {
+		return "join";
+	}
+	
+	
+
+	
 
 }
 

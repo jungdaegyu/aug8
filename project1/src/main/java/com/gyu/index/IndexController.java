@@ -1,4 +1,4 @@
-package com.gyu.pro1;
+package com.gyu.index;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;

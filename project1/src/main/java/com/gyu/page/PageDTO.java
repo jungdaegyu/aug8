@@ -1,4 +1,4 @@
-package com.gyu.pro1;
+package com.gyu.page;
 
 public class PageDTO {
 	private int firstRecordIndex, recordCountPerPage;

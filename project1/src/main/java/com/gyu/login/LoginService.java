@@ -1,4 +1,4 @@
-package com.gyu.pro1;
+package com.gyu.login;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -15,8 +15,11 @@ public class LoginService {
 		
 	}	
 	
-	
-	
+
+	public LoginDTO join(LoginDTO dto) {
+		return loginDAO.join(dto);
+		
+	}
 	
 	
 }

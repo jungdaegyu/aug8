@@ -1,13 +1,14 @@
-package com.gyu.pro1;
+package com.gyu.board;
 
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.apache.ibatis.session.SqlSession;
 import org.springframework.stereotype.Repository;
+
+import com.gyu.page.PageDTO;
 
 //Inject 사용해보기
 

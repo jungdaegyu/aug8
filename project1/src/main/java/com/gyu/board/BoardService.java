@@ -1,15 +1,15 @@
-package com.gyu.pro1;
+package com.gyu.board;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 import javax.inject.Inject;
 import javax.inject.Named;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import com.gyu.page.PageDTO;
+import com.gyu.util.Util;
 
 @Service("boardService") //괄호안에 boardService라고 적은건 이름을 지정하기 위해.. //BoardController에서 씀
 public class BoardService {

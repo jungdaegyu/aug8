@@ -1,6 +1,5 @@
 @charset "UTF-8";
 
-
 table{
 	margin:0 auto;
 	width: 800px;
@@ -40,7 +39,6 @@ tr:hover {
 
 }
 
-
 .page-div{
 	margin : 0 auto;
 	display: flex;
@@ -51,6 +49,7 @@ tr:hover {
 	text-decoration: none;
 
 	}
+	
 .page-div img{
 	width: 20px;
 	height: 20px;

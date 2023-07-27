@@ -67,6 +67,8 @@ function check1(){
 		<img alt="" src="./img/login.png" height="350px">
 	
 	</div>
+	
+	<div class="login-form">
 	<form action="/login" method="post" onsubmit="return check()">
         <label for="username">아이디:</label>
         <input type="text" id="id" name="id" onchange="checkID()">
@@ -75,9 +77,13 @@ function check1(){
         <input type="password" id="pw" name="pw">
         <br>
         <button type="submit" class="login">LogIn</button>
-        <span id="msg"></span>
-        
+        <span id="msg"></span> 
     </form>
+    	 <button>아이디 찾기</button>
+    	 <button>비밀번호 찾기</button>
+   		 <a href="./join">회원가입</a>
+    </div>
+   
     
  
  

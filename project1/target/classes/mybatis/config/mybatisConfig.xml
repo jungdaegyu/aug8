@@ -4,8 +4,8 @@
   "https://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>
 	<typeAliases>
-		<typeAlias type="com.gyu.pro1.BoardDTO" alias="boardDTO"/>
-		<typeAlias type="com.gyu.pro1.LoginDTO" alias="loginDTO"/>
-		<typeAlias type="com.gyu.pro1.PageDTO" alias="pageDTO"/>
+		<typeAlias type="com.gyu.board.BoardDTO" alias="boardDTO"/>
+		<typeAlias type="com.gyu.login.LoginDTO" alias="loginDTO"/>
+		<typeAlias type="com.gyu.page.PageDTO" alias="pageDTO"/>
 	</typeAliases>
 </configuration>
