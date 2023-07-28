@@ -14,7 +14,6 @@
 let text = "<p>올바른 아이디를 입력하세요.</p>"; //전역변수
 //호이스팅이 뭐예요? let vs var? json? const
 		
-		
 function checkID(){
 	//alert("!");
 	let msg = document.getElementById("msg"); //지역변수
@@ -53,7 +52,7 @@ function check(){
 function check1(){
 	// alert("!");
 	let id = document.getElementById("id");	
-	alert("왼쪽에서 로그인 하세요");
+	alert("위에서 로그인 하세요");
 	id.focus(); /*아이디 쪽으로 다시 옮겨짐 */
 		
 }
@@ -65,31 +64,37 @@ function check1(){
 <%@ include file="menu.jsp" %>
 	<div style="text-align:center;"><!--사진 가운데로 -->
 		<img alt="" src="./img/login.png" height="350px">
-	
 	</div>
-	
-	<div class="login-form">
+	<div style="text-align:center;">
+	<div id="wrap">
+   <h1 class="member">member login</h1>
+	<div class="form">
+	 <div class="form2">
+     <div class="form3">
 	<form action="/login" method="post" onsubmit="return check()">
-        <label for="username">아이디:</label>
+        <label for="username">ID : </label>
         <input type="text" id="id" name="id" onchange="checkID()">
-        <br>
-        <label for="password">비밀번호:</label>
+       
+        <label for="password">PW : </label>
         <input type="password" id="pw" name="pw">
-        <br>
-        <button type="submit" class="login">LogIn</button>
+        <div class="clear"></div>
+        </div>
+        <button type="submit" class="login">로그인</button>
         <span id="msg"></span> 
+   		</div>
+ 	
     </form>
     	 <button>아이디 찾기</button>
     	 <button>비밀번호 찾기</button>
    		 <a href="./join">회원가입</a>
+   	   <label><input type="checkbox">아이디저장</label> 
+       <label><input type="checkbox">보안접속</label>
+    </div>
     </div>
    
+  
     
- 
- 
- 
-    
-  <form action="/login" method="post">
+<!--<form action="/login" method="post">
   <div id="wrap">
    <h1 class="member">member login</h1>
    <div class="form">
@@ -112,12 +117,7 @@ function check1(){
    </div>
   </div>
  </form>
- 
- 
- 
-
-ㅣ
-</body>
+</body> -->
 
 
 </html>

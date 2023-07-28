@@ -7,12 +7,12 @@
 </style>
 	<nav>
 		<ul>
-			<li onclick="link('index')">메인</li>
+			<li onclick="link('')">메인</li>
 			<li onclick="link('board')">게시판</li>
 			<li onclick="link('board2')">게시판2</li>
 			<li onclick="link('mooni')">문의사항</li>
 			<li onclick="link('notice')">공지</li>
-			
+			<li onclick="link('members')">회원리스트</li>
 			
 			
 			<c:choose>

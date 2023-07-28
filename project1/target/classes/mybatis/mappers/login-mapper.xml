@@ -3,11 +3,34 @@
     PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
     "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="login"> 
+
+
+	<resultMap type="com.gyu.login.JoinDTO" id="join">
+		<result column="m_no" property="no" jdbcType="INTEGER" javaType="Integer"/>
+		<result column="m_id" property="id" jdbcType="VARCHAR" javaType="String"/>
+		<result column="m_name" property="name" jdbcType="VARCHAR" javaType="String"/>
+		<result column="m_addr" property="addr" jdbcType="VARCHAR" javaType="String"/>
+		<result column="m_birth" property="birth" jdbcType="DATE" javaType="String"/>
+		<result column="m_mbti" property="mbti" jdbcType="VARCHAR" javaType="String"/>
+		<result column="m_gender" property="gender" jdbcType="INTEGER" javaType="Integer"/>
+	
+	</resultMap>
+
+
 	<select id="login" parameterType="loginDTO" resultType="loginDTO">
 	SELECT m_name, COUNT(*) AS 'count' 
 	FROM membersView 
 	WHERE m_id=#{m_id } AND m_pw=#{m_pw }
 	</select>
 	
+	<insert id="join" parameterType="com.gyu.login.JoinDTO"> 
+		INSERT INTO members(m_id, m_pw, m_name, m_addr, m_birth, m_mbti, m_gender)
+		VALUES(#{id}, #{pw1}, #{name}, #{addr}, #{birth}, #{mbti}, #{gender})
+	</insert>
+	
+	<select id="members" resultMap="join"> <!--dto가 아님 이거 만들때는 join이 당장 없는거임 만들어야해 그래서 바로 위에 만들어줌-->
+		SELECT * FROM members
+	
+	</select>
 	
 </mapper>

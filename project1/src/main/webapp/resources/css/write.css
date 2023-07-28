@@ -26,13 +26,7 @@
 }
 
 
-body {
-    background-image: url("your-gif-file.gif");
-    /* 배경화면을 모든 뷰포트에 꽉 채우도록 설정 */
-    background-size: cover;
-    /* 배경화면을 고정시켜 스크롤해도 움직이지 않도록 설정 */
-    background-attachment: fixed;
-}
+
 
 
 
