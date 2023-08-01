@@ -6,10 +6,43 @@
 <head>
 <meta charset="UTF-8">
 <title>회원가입</title>
+<link rel="stylesheet" href="./css/menu.css">
+<link rel="stylesheet" href="./css/join.css?version=0.2">
 <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
 <link rel="icon" href="./img/favicon.ico" type="image/x-icon">
-<link rel="stylesheet" href="./css/menu.css">
-<link rel="stylesheet" href="./css/join.css">
+<script src="./js/jquery-3.7.0.min.js"></script> 
+<script type="text/javascript"> 
+$(function(){
+	$("#idCheck").click(function(){
+		let id = $("#id").val();
+		if (id == "" || id.length < 5) {
+			//alert("아이디는 5글자 이상이어야 합니다.");
+			$("#resultMSG").text("**아이디는 5글자 이상이어야 합니다**");
+			$("#resultMSG").css("color", "red");
+			$("#id").focus();
+		} else {
+			$.ajax({
+				url: "./checkID",
+				type : "post",
+				data : {"id": id}, // checkID?id=gyu
+				dataType: "html", 
+				success:function(data){
+					$("#resultMSG").text("data : " + data);
+				},
+				error: function(request, status, error){
+					$("#resultMSG").text("error : " + error);
+				}
+			});
+			
+			
+			$("#resultMSG").text("다섯글자 이상으로 들어왔습니다.");
+			$("#resultMSG").css("color", "green");
+		}
+		return false;
+		
+	});
+});
+</script> 
 </head>
 <body>
 <%@ include file="menu.jsp" %>
@@ -17,10 +50,12 @@
 	<form action="./join" method="post">
 	<h1>회원가입 창입니다.</h1>
 	<hr>
-	<div class="label-row">
+	<div class="label-row" style="height: 80px">
 		<div class="label-name">아이디</div>
 		<div class="label-in">
-			<input type="text" name="id"> 
+			<input type="text" name="id" id="id"> 
+			<button id="idCheck">중복검사</button>
+			<span id="resultMSG"></span>
 		</div>	
 </div>
 	<div class="label-row">
@@ -105,6 +140,7 @@
 	
 	</div>
 	</form>
+	
 </div>
 
 

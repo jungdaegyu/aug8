@@ -39,11 +39,12 @@ function check2(){
 <body>
 <%@ include file="menu.jsp" %>
 	<h1>예쁜말</h1>
+	<button class="btn btn-outline-primary">버튼</button>
 	<div class="write-div">
 	<form action="./write" method="post" onsubmit="return check2()"><!--글을 쓸때 post를 쓴다 -->		
 		<input type="text" id="title" name="title" >
 		<textarea id="summernote" name="content"></textarea>
-		<button class="btn100" type="submit" onclick="return check2()">글쓰기</button>
+		<button class="btn100 btn btn-primary" type="submit" onclick="return check2()">글쓰기</button>
 		</form>
 		<!-- type="submit" => 제출버튼, 폼데이터로 데이터 전송 -->	
 	</div>
