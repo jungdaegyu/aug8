@@ -8,13 +8,14 @@ table{
 }
 
 th{
+	text-align: center;
 	height:50px;
 	background-color: #5778ff;
 }
 td{
 	text-align: center;
 	border-bottom: 1px solid gray;
-	align-content: center;
+	
 }
 
 .td1{
@@ -31,7 +32,7 @@ td{
 }
 
 .title{
-	text-align: left;
+	text-align: center;
 }
 
 tr:hover {
@@ -56,7 +57,6 @@ tr:hover {
 	vertical-align: bottom;
 	
 }
-
 
 
 

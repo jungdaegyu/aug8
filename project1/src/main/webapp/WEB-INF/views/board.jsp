@@ -23,7 +23,7 @@
 	<h1>게시판입니다.</h1>
 	${paginationInfo} 
 		<div style="text-align:center;"><!--사진 가운데로 -->
-		<img alt="" src="./img/image22.jpeg" height="200px">	
+		<img alt="" src="./img/happy.png" height="200px">	
 		</div>
 	<%-- 길이 검사 : ${fn:length(list) } --%>
 	<c:choose>

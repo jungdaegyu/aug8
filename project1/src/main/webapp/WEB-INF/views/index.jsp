@@ -14,7 +14,7 @@
 		
 	<h1>index</h1>
 		<div style="text-align:center;"><!--사진 가운데로 -->
-		<img alt="" src="./img/image22.jpeg" height="500px">	
+		<img alt="" src="./img/happy.png" height="500px">	
 	</div>
      
  
