@@ -13,7 +13,7 @@
 <script src="./js/jquery-3.7.0.min.js"></script> 
 <script type="text/javascript"> 
 $(function(){
-	$("#resultForm").hide();
+	$("#resultForm").hide(); //입력이 더 필요하다가 나오는 창
 	$("#idCheck").click(function(){ //중복검사를 클릭하면
 		$("#resultForm").show();
 		let id = $("#id").val(); //입력한 아이디를 변수에 넣어줌
