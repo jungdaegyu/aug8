@@ -1,6 +1,7 @@
 package com.gyu.board;
 
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.annotation.Resource;
@@ -81,7 +82,13 @@ public class BoardController {
 		BoardDTO dto = new BoardDTO();
 		dto.setBno(bno);
 		
-		BoardDTO result = boardService.detail(dto); 
+		BoardDTO result = boardService.detail(dto);  //08-04 //들어가서 디테일을 볼건데 댓글이 0보다 크네? 그러면 댓글(commentsList)를 번호와 같이 실어서 보내줌
+		// System.out.println(result.getCommentcount()); //댓글 갯수 찍어보기
+		if (result.getCommentcount() > 0) {
+			//데이터베이스에 물어봐서 jsp로 보냅니다.
+			List<Map<String, Object>> commentsList = boardService.commentsList(bno);
+			model.addAttribute("commentsList", commentsList);
+		}
 		model.addAttribute("dto", result);
 		
 		return "detail";

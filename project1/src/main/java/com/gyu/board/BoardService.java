@@ -1,6 +1,7 @@
 package com.gyu.board;
 
 import java.util.List;
+import java.util.Map;
 
 import javax.inject.Inject;
 import javax.inject.Named;
@@ -96,6 +97,12 @@ public class BoardService {
 
 	public int totalCount() { //7.26
 		return boardDAO.totalCount();
+	}
+
+
+	public List<Map<String, Object>> commentsList(int bno) {
+		
+		return boardDAO.commentsList(bno);
 	}
 		
 }
