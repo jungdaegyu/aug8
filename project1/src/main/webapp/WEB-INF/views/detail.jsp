@@ -27,15 +27,55 @@
 			location.href="./delete?bno=${dto.bno}"; //페이지 이동		
 		}		
 } 
-
+	
+	//댓글 삭제 버튼 만들기 = 반드시 로그인 하고, 자신의 글인지 확인하는 검사 구문 필요
+	function cdel(cno){
+		if (confirm("댓글을 삭제하시겠습니까?")) {
+			location.href="./cdel?bno=${dto.bno}&cno="+cno;
+		}
+	}
+	
 	$(function(){
 		$(".commentBox").hide();
 		$("#openComment").click(function(){
 			$(".commentBox").show('slow');
 			$("#openComment").remove();
 		});
+		
+		//댓글 삭제 다른 방법
+		$(".cdel").click(function(){
+			if (confirm("댓글을 삭제하시겠습니까?")) {
+				//alert("삭제합니다" + $(this).parent().siblings(".cid").text()); //this.parent는 div를 감싸고 있는 바로 위의 부모타입을 찾아감.. siblings은 부모의 형제를 찾아
+				let cno = $(this).parent().siblings(".cid").text();
+				let cno_comments = $(this).parents(".comment");//변수처리 한 번
+			//location.href="./cdel?bno=${dto.bno}&cno="+cno;
+			$.ajax({
+				url: "./cdelR",
+				type: "post",
+				data: {bno : ${dto.bno}, cno : cno},
+				dataType: "json",
+				success:function(data){
+					//alert(data);
+					if (data.result == 1) {
+						cno_comments.remove();
+					}else {
+						alert("통신에 문제가 발생했습니다. 다시 시도해주세요.");
+					}
+					
+				},
+				error:function(error){
+					alert("에러가 발생했습니다" + error);
+				}
+			});
+			
+			
+			}
+			
+		});
+	
 	});
 	
+	//댓글 수정 버튼 만들기 = 반드시 로그인 하고, 자신의 글인지 확인하는 검사 구문 필요
 	
 </script>
 </head>
@@ -68,7 +108,13 @@
 			<c:forEach items="${commentsList}" var="c">
 			<div class="comment">
 			<div class="commentHead">
-				<div class="cname">${c.m_name}(${c.m_id})</div>
+				<div class="cname">
+				${c.m_name}(${c.m_id})
+				<c:if test="${sessionScope.mid ne null && sessionScope.mid eq c.m_id}">
+				<img alt="" src="./img/update1.png" onclick="cedit()">&nbsp;
+				<img alt="" src="./img/delete1.png" class="cdel" onclick="cdel1(${c.c_no})">	
+				</c:if>
+				</div>
 				<div class="cdate">${c.c_date}</div>
 				<div class="cid">${c.c_no}</div>
 			</div>

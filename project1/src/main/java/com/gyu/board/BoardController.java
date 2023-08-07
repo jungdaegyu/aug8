@@ -214,10 +214,29 @@ public class BoardController {
 		
 	}
 	
+	//2023-08-07 입추, 프레임워크 프로그래밍	
+	@GetMapping("/cdel") //bno랑 cno가 필수로 들어와야함
+	public String cdel(@RequestParam Map<String, Object> map, HttpSession session) {
+		//로그인 여부 검사
+		if (session.getAttribute("mid") != null) {
+			//값 들어왔는지 여부 검사			
+			
+			System.out.println(map);
+			if (map.containsKey("bno") && map.get("cno") != null &&
+					!(map.get("bno").equals("")) && !(map.get("cno").equals("")) &&
+					util.isNum(map.get("bno")) && util.isNum(map.get("cno"))) {
+				// System.out.println("여기로 들어왔습니다.");
+				map.put("mid", session.getAttribute("mid"));
+				int result = boardService.cdel(map);
+				System.out.println("삭제 결과 : " +  result);
+			}
+			
+		} 
 
+		return "redirect:/detail?bno=" +map.get("bno");
+	}
+	
 
-	
-	
 	
 	
 	

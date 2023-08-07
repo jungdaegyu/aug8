@@ -83,6 +83,20 @@ public class Util { //따로 객체를 만들어준 이유는 계속 재활용�
 		
 	}
 	
+	//숫자인지 확인하기
+	public boolean isNum(Object obj) {
+		try {
+			Integer.parseInt(String.valueOf(obj)); // 괄호안의 obj를 스트링으로 변환해서 인트로 바꾸는거임
+			return true;
+		} catch (Exception e) {
+			
+			return false;
+			
+		}
+		
+		
+		
+	}
 	
 	
 }

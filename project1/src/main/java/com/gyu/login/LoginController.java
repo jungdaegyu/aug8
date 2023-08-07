@@ -112,7 +112,12 @@ public class LoginController {
 		return mv;
 	}
 	
-	
+	//자바스크립트만 만든것
+	@GetMapping("/join2")
+	public String join2() {
+		return "join2";
+		
+	}
 	
 	
 	

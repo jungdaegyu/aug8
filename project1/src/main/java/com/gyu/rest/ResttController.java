@@ -3,6 +3,8 @@ package com.gyu.rest;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpSession;
+
 import org.json.JSONArray;
 import org.json.JSONObject;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,13 +13,21 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.gyu.board.BoardService;
 import com.gyu.login.LoginService;
+import com.gyu.util.Util;
 
 @RestController //ajax를 쓸 것이기 때문에 이렇게 적음 이렇게 적어놔서 조인jsp에서 에이작스로 작성해준 성공시 결과값 : 1이 출력이 된다??
 public class ResttController {
 	
 	@Autowired 
 	private LoginService loginService;
+	
+	@Autowired
+	private BoardService boardService;
+	
+	@Autowired
+	private Util util;
 
 	
 	//아이디 중복검사 2023-08-02 
@@ -50,6 +60,33 @@ public class ResttController {
 		return json.toString(); //마지막에 toStirng으로 넘김
 	}
 
+	
+	@PostMapping("/cdelR")
+	public String cdelR(@RequestParam Map<String, Object> map, HttpSession session) {
+		int result =0;
+		
+		if (session.getAttribute("mid") != null) {
+			if (map.containsKey("bno") && map.get("cno") != null &&
+					!(map.get("bno").equals("")) && !(map.get("cno").equals("")) &&
+					util.isNum(map.get("bno")) && util.isNum(map.get("cno"))) {
+				
+				System.out.println(map);
+				
+				
+				map.put("mid", session.getAttribute("mid"));
+				result = boardService.cdel(map);
+				System.out.println("삭제 결과 : " + result);
+				
+
+			}
+		}
+		JSONObject json = new JSONObject();
+	      json.put("result", result);
+	      return json.toString();
+		
+		
+	}
+	
 	
 	
 }
