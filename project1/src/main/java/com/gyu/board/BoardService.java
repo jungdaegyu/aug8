@@ -110,5 +110,11 @@ public class BoardService {
 	
 		return boardDAO.cdel(map);
 	}
+
+
+	public int cedit(Map<String, Object> map) {
+		
+		return boardDAO.cedit(map);
+	}
 		
 }
